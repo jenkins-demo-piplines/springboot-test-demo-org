@@ -17,16 +17,17 @@ pipeline{
         }
 
         stage('Dependency Scanning'){
+
            parallel{
+
            stage('OWASP Dependency Check'){
-            stapes{
+            steps{
             sh 'echo Dependency audit'
             }
-        
            }
+
             stage('OWASP Dependency Check'){
             steps{
-
                 dependencyCheck additionalArguments: '--scan ./ --format HTML ', odcInstallation: 'OWASP-DepCheck-12-1-2'
                 dependencyCheckPublisher failedTotalCritical:1, pattern: '**/dependency-check-report.xml',stopBuild: true
                 // dependencyCheck additionalArguments: '''
