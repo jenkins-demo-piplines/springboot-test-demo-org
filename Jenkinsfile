@@ -6,11 +6,11 @@ pipeline{
     }
 
     stages{
-        stage('maven Version'){
+        stage('Install Dependencies'){
             steps{
                 sh '''
                 
-                mvn --version
+                mvn clean install
 
                 '''
             }
