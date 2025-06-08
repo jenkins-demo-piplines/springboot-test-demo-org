@@ -19,7 +19,6 @@ pipeline{
         stage('Install Dependencies'){
             steps{
                 sh '''
-                sleep 100s
                 mvn clean install -DskipTests
 
                 '''
