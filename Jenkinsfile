@@ -20,7 +20,7 @@ pipeline{
 
            parallel{
 
-           stage('OWASP Dependency Check'){
+           stage('Dependency Audit'){
             steps{
             sh 'echo Dependency audit'
             }
