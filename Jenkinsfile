@@ -28,7 +28,7 @@ pipeline{
             steps{
 
                 dependencyCheck additionalArguments: '--scan ./ --format HTML ', odcInstallation: 'OWASP-DepCheck-12-1-2'
-                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+                dependencyCheckPublisher failedTotalCritical:1, pattern: '**/dependency-check-report.xml',stopBuild: true
                 // dependencyCheck additionalArguments: '''
                 // --scan \' ./\'
                 //  --out \' ./\'
