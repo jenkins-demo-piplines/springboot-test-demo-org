@@ -9,11 +9,17 @@ pipeline{
         MYSQL_URL = 'test'
     }
 
+    options {
+  disableConcurrentBuilds abortPrevious: true
+  disableResume()
+}
+
+
     stages{
         stage('Install Dependencies'){
             steps{
                 sh '''
-                
+                sleep 100s
                 mvn clean install -DskipTests
 
                 '''
