@@ -16,7 +16,15 @@ pipeline{
             }
         }
 
-        stage('OWASP Dependency Check'){
+        stage('Dependency Scanning'){
+           parallel{
+           stage('OWASP Dependency Check'){
+            stapes{
+            sh 'echo Dependency audit'
+            }
+        
+           }
+            stage('OWASP Dependency Check'){
             steps{
 
                 dependencyCheck additionalArguments: '--scan ./ --format HTML ', odcInstallation: 'OWASP-DepCheck-12-1-2'
@@ -29,5 +37,10 @@ pipeline{
                 
             }
         }
+
+           }
+        }
+
+     
     }
 }
