@@ -15,5 +15,16 @@ pipeline{
                 '''
             }
         }
+
+        stage('OWASP Dependency Check'){
+            steps{
+                dependencyCheck additionalArguments: '''
+                --scan \' ./\'
+                 --out \' ./\'
+                 --format \' ALL\'
+                 --prettyPrint''' odcInstallation: 'OWASP-DepCheck-12-1-2'
+                
+            }
+        }
     }
 }
