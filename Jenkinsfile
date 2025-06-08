@@ -5,6 +5,10 @@ pipeline{
         maven 'MVN387'
     }
 
+    environment{
+        MYSQL_URL = 'test'
+    }
+
     stages{
         stage('Install Dependencies'){
             steps{
@@ -51,7 +55,11 @@ pipeline{
         }
         stage('Unit Test'){
             steps{
-                sh 'mvn test'
+                withCredentials([usernamePassword(credentialsId: 'mysql-db-credentials', passwordVariable: 'MYSQL_PASSWORD', usernameVariable: 'MYSQL_USERNAME')]) {
+       sh 'mvn test'
+}
+          junit allowEmptyResults: true, keepProperties: true, testResults: 'target/surefire-reports/*.xml'
+              
             }
         }
 
