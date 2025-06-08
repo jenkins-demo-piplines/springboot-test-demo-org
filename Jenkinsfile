@@ -25,10 +25,11 @@ pipeline{
            parallel{
 
            stage('Dependency Audit'){
-            steps{
-                options {
+                            options {
                       timestamps()
                          }
+            steps{
+
 
             sh 'echo Dependency audit'
             }
