@@ -27,14 +27,16 @@ pipeline{
            }
 
             stage('OWASP Dependency Check'){
+
             steps{
-                dependencyCheck additionalArguments: '--scan ./ --format HTML ', odcInstallation: 'OWASP-DepCheck-12-1-2'
-                dependencyCheckPublisher failedTotalCritical:1, pattern: '**/dependency-check-report.xml',stopBuild: true
-                // dependencyCheck additionalArguments: '''
-                // --scan \' ./\'
-                //  --out \' ./\'
-                //  --format \' ALL\'
-                //  --prettyPrint''' ,odcInstallation: 'OWASP-DepCheck-12-1-2'
+                // dependencyCheck additionalArguments: '--scan ./ --format HTML ', odcInstallation: 'OWASP-DepCheck-12-1-2'
+               
+                dependencyCheck additionalArguments: '''
+                --scan \' ./\'
+                 --out \' ./\'
+                 --format \' ALL\'
+                 --prettyPrint''' ,odcInstallation: 'OWASP-DepCheck-12-1-2'
+                  dependencyCheckPublisher failedTotalCritical:1, pattern: 'dependency-check-report.xml',stopBuild: true
                 
             }
         }
