@@ -26,6 +26,10 @@ pipeline{
 
            stage('Dependency Audit'){
             steps{
+                options {
+                      timestamps()
+                         }
+
             sh 'echo Dependency audit'
             }
            }
@@ -33,6 +37,7 @@ pipeline{
             stage('OWASP Dependency Check'){
 
             steps{
+
                 // dependencyCheck additionalArguments: '--scan ./ --format HTML ', odcInstallation: 'OWASP-DepCheck-12-1-2'
                
                 dependencyCheck additionalArguments: '''
@@ -54,6 +59,10 @@ pipeline{
            }
         }
         stage('Unit Test'){
+                    options {
+                    retry(2)
+                    }
+
             steps{
                 withCredentials([usernamePassword(credentialsId: 'mysql-db-credentials', passwordVariable: 'MYSQL_PASSWORD', usernameVariable: 'MYSQL_USERNAME')]) {
        sh 'mvn test'
