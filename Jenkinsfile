@@ -78,7 +78,7 @@ pipeline{
             steps {
                 sh ''' mvn sonar:sonar \
                     -Dsonar.host.url=http://localhost:9001/ \
-                    -Dsonar.login=squ_a79cc0fc19889ab60780fa45f4c78d0854353b9d '''
+                    -Dsonar.login=sqp_2bf68aa9cce2d8c4a44b939f087a6150a46d26e5 '''
             }
         }
 
