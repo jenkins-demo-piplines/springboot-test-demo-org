@@ -38,8 +38,9 @@ pipeline{
 
 
             sh 'echo Dependency audit'
-            sh 'echo $MYSQL_DB_CREDS_USR'
-            sh 'echo $MYSQL_DB_CREDS_PSW'
+            sh 'echo Colon-Separated $MYSQL_DB_CREDS'
+            sh 'echo Username - $MYSQL_DB_CREDS_USR'
+            sh 'echo Password - $MYSQL_DB_CREDS_PSW'
             }
            }
 
