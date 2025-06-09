@@ -85,7 +85,7 @@ pipeline{
             }
                
             }
-        }
+        
 
 //           stage('Sonarqube Analysis') {
 //             steps {
