@@ -76,9 +76,10 @@ pipeline{
 
           stage('Sonarqube Analysis') {
             steps {
-                sh ''' mvn sonar:sonar \
-                    -Dsonar.host.url=http://localhost:9001/ \
-                    -Dsonar.login=sqp_2bf68aa9cce2d8c4a44b939f087a6150a46d26e5 '''
+                sh '''mvn clean verify sonar:sonar \
+  -Dsonar.projectKey=springboot-test-demo-org \
+  -Dsonar.host.url=http://localhost:9001 \
+  -Dsonar.login=sqp_2bf68aa9cce2d8c4a44b939f087a6150a46d26e5 '''
             }
         }
 
