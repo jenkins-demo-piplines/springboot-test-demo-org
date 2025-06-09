@@ -85,6 +85,32 @@ pipeline{
             }
                
             }
+
+            stage('Deploy -AWS EC2'){
+                when {
+                    branch 'feature/*'
+                   }
+
+                steps{
+                    script{
+                  sshagent(['aws-dev-deploy-ec2-instance']) {
+                    sh '''
+                     ssh -o StrictHostKeyChecking=no ubuntu@13.220.194.23 "
+                    
+                     if docker ps -a | grep -q "springboot-test-demo-org"; then
+                     echo "Container found. Stopping.."
+                     docker stop "springboot-test-demo-org" && docker rm "springboot-test-demo-org"
+                     echo "Container stopped and removed."
+                     fi
+                     
+
+                     dokcer run --name springboot-test-demo-org -p 8080:8080 slpavaniv/springboot-test-demo-org:$GIT_COMMIT
+                     "
+                    '''
+                     }
+                }
+                }
+            }
         
 
 //           stage('Sonarqube Analysis') {
