@@ -72,7 +72,7 @@ pipeline{
         }
 
         stage('Build Docker Image'){
-            stages{
+            steps{
                 sh 'docker build -t slpavaniv/springboot-test-demo-org:$GIT_COMMIT .'
             }
         }
