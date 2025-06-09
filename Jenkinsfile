@@ -77,6 +77,16 @@ pipeline{
             }
         }
 
+                stage('Push Docker Image'){
+            steps{
+                withDockerRegistry(credentialsId: 'docker-hub-credentials', url: "") {
+                    sh 'docker push slpavaniv/springboot-test-demo-org:$GIT_COMMIT'
+                    }
+            }
+               
+            }
+        }
+
 //           stage('Sonarqube Analysis') {
 //             steps {
 //                 sh '''mvn clean verify sonar:sonar \
