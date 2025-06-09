@@ -65,10 +65,6 @@ pipeline{
            }
         }
         stage('Unit Test'){
-                    options {
-                    retry(2)
-                    }
-
             steps{
                 withCredentials([usernamePassword(credentialsId: 'mysql-db-credentials', passwordVariable: 'MYSQL_PASSWORD', usernameVariable: 'MYSQL_USERNAME')]) {
        sh 'mvn test'
@@ -77,6 +73,24 @@ pipeline{
               
             }
         }
+
+          stage('Sonarqube Analysis') {
+            steps {
+                sh ''' mvn sonar:sonar \
+                    -Dsonar.host.url=http://localhost:9001/ \
+                    -Dsonar.login=squ_a79cc0fc19889ab60780fa45f4c78d0854353b9d '''
+            }
+        }
+
+
+        // stage('SonarQube Analysis') {
+        //     steps {
+        //         withSonarQubeEnv('ServerNameSonar') {
+        //             bat '''mvn clean verify sonar:sonar -Dsonar.projectKey=ProjectNameSonar -Dsonar.projectName='ProjectNameSonar' -Dsonar.host.url=http://localhost:9000''' //port 9000 is default for sonar
+        //             echo 'SonarQube Analysis Completed'
+        //         }
+        //     }
+        // }
 
      
     }
