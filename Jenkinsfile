@@ -71,6 +71,12 @@ pipeline{
             }
         }
 
+        stage('Build Docker Image'){
+            stages{
+                sh 'docker build -t slpavaniv/springboot-test-demo-org:$GIT_COMMIT .'
+            }
+        }
+
 //           stage('Sonarqube Analysis') {
 //             steps {
 //                 sh '''mvn clean verify sonar:sonar \
