@@ -7,6 +7,7 @@ pipeline{
 
     environment{
         MYSQL_URL = 'test'
+        MYSQL_DB_CREDS = credentials('mysql-db-credentials')
     }
 
     options {
@@ -37,6 +38,8 @@ pipeline{
 
 
             sh 'echo Dependency audit'
+            sh 'echo $MYSQL_DB_CREDS_USR'
+            sh 'echo $MYSQL_DB_CREDS_PSW'
             }
            }
 
